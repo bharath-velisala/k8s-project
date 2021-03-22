@@ -10,27 +10,6 @@ pipeline{
         //         bat "docker rm kanban-ui"
         //     }
         // }
-        stage("docker build"){
-            steps{
-                sh "docker-compose up -d"
-            }
-        }
-
-        stage("commiting the deocker images"){
-            steps{
-                sh "docker commit kanban-ui bharathvelisala/challenge-ui"
-                sh "docker commit kanban-app bharathvelisala/challenge-app" 
-            }
-        }
-
-        stage("pushing the images to docker hub"){
-            steps{
-                withDockerRegistry([ credentialsId: "2602cbc6-6d34-4825-835f-045a8acffaee", url: "" ]){
-                    sh "docker push bharathvelisala/challenge-app"
-                    sh "docker push bharathvelisala/challenge-ui"
-                }
-            }
-        }
 
         stage("kubernates"){
             steps{
